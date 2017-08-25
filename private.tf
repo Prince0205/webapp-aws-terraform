@@ -1,6 +1,7 @@
 /*
   Database Servers
 */
+
 resource "aws_security_group" "db" {
     name = "vpc_db"
     description = "Allow incoming database connections."
@@ -50,14 +51,27 @@ resource "aws_security_group" "db" {
 }
 
 resource "aws_instance" "db-1" {
-    ami = "${var.amis}"
-    availability_zone = "us-east-1b"
+	ami = "${var.amis}"
+	availability_zone = "us-east-1b"
 	private_ip = "10.0.1.100"
-    instance_type = "t2.micro"
-    key_name = "${var.key_name}"
-    vpc_security_group_ids = ["${aws_security_group.db.id}"]
-    subnet_id = "${aws_subnet.us-east-1-private.id}"
-    source_dest_check = false
+	instance_type = "t2.micro"
+	key_name = "${var.key_name}"
+	vpc_security_group_ids = ["${aws_security_group.db.id}"]
+	subnet_id = "${aws_subnet.us-east-1-private.id}"
+	source_dest_check = false
 
+
+	# provisioner "file" {
+		# source      = "script/script1.sh"
+		# destination = "/tmp/script1.sh"
+		
+		# connection {
+			# type		= "ssh"
+			# user		= "ec2-user"
+			# #private_key	= "${file(var.private_key_path)}"
+			# timeout		= "10m"
+		# }
+	# }
+	
     tags {Name = "DB Server 1"}
 }

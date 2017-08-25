@@ -1,6 +1,7 @@
 /*
   Web Servers
 */
+
 resource "aws_security_group" "web" {
     name = "vpc_web"
     description = "Allow incoming HTTP connections."
@@ -52,6 +53,18 @@ resource "aws_instance" "web-1" {
     subnet_id = "${aws_subnet.us-east-1-public.id}"
     source_dest_check = false
     associate_public_ip_address = true
+	
+	# provisioner "file" {
+		# source      = "script/script1.sh"
+		# destination = "/tmp/script1.sh"
+		
+		# connection {
+			# type		= "ssh"
+			# user		= "ec2-user"
+			# #private_key	= "${file(var.private_key_path)}"
+			# timeout		= "10m"
+		# }
+	# }
 	
     tags {Name = "Web Server 1"}
 }

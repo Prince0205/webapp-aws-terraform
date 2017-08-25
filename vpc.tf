@@ -12,6 +12,7 @@ resource "aws_internet_gateway" "default" {
 /*
   NAT Instance
  */
+ 
 resource "aws_security_group" "nat" {
     name = "vpc_nat"
     description = "Allow traffic to pass from the private subnet to the internet"
@@ -27,7 +28,7 @@ resource "aws_security_group" "nat" {
         to_port = 443
         protocol = "tcp"
         cidr_blocks = ["${var.private_subnet_cidr}"]
-    }
+	}
 	ingress {
         from_port = 22
         to_port = 22
@@ -46,7 +47,6 @@ resource "aws_security_group" "nat" {
         protocol = "icmp"
         cidr_blocks = ["0.0.0.0/0"]
     }
-
     egress {
         from_port = 80
         to_port = 80
@@ -89,7 +89,21 @@ resource "aws_instance" "nat" {
     subnet_id = "${aws_subnet.us-east-1-public.id}"
     associate_public_ip_address = true
     source_dest_check = false
+	
+	
+	# provisioner "file" {
+		# source      = "script/script1.sh"
+		# destination = "/tmp/script1.sh"
+		
+		# connection {
+			# type		= "ssh"
+			# user		= "ec2-user"
+			# private_key	= "${file(var.private_key_path)}"
+			# timeout		= "10m"
+		# }
+	# }
 
+	
     tags {Name = "VPC NAT"}
 }
 
@@ -101,6 +115,7 @@ resource "aws_eip" "nat" {
 /*
   Public Subnet
 */
+
 resource "aws_subnet" "us-east-1-public" {
     vpc_id = "${aws_vpc.default.id}"
 
@@ -129,6 +144,7 @@ resource "aws_route_table_association" "us-east-1-public" {
 /*
   Private Subnet
 */
+
 resource "aws_subnet" "us-east-1-private" {
     vpc_id = "${aws_vpc.default.id}"
 

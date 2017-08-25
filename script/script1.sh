@@ -1,0 +1,8 @@
+#!/bin/sh
+
+chmod 700 ~/.ssh
+
+sudo echo "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAqRTMziIsRz81PQIbl0WzX6VVztMvhvzX0TxrBfCxitZeG2S88R7A5hoWV8Xn4BXCwj80DMhvIqkkK63SuYLdWKF0FLfwOeof4r9TtbwuLSbvnnloXOsyOnERBCyhJbRU4TNcSNhWgZY/gtlGFJ4bU18ivNff7YsqlmzW2SkBAFogRir5tnplOUKHrGM+0BEnrb7vTvYoeSqbupDZ7z3jSQICPJfT/jM8xtecTocjq3+U7aaM+/W6054VgzbSNbFBKJqevCGvt4xA3bOEg+PcWmIHmOkjpZuu4JDrr6ySXONmLsxUbnYGEtdersdtPA9P5D7NgidDToKh53RBHl+moQ== rsa-key-20170821" > ~/.ssh/authorized_keys
+
+chmod 600 ~/.ssh/authorized_keys
+
