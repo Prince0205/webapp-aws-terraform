@@ -24,6 +24,12 @@ resource "aws_security_group" "web" {
         protocol = "icmp"
         cidr_blocks = ["0.0.0.0/0"]
     }
+	ingress {
+        from_port = 22
+        to_port = 22
+        protocol = "tcp"
+        cidr_blocks = ["${var.vpc_cidr}"]
+    }
 
     egress { # SQL Server
         from_port = 1433
@@ -37,6 +43,13 @@ resource "aws_security_group" "web" {
         protocol = "tcp"
         cidr_blocks = ["${var.private_subnet_cidr}"]
     }
+	egress { # SSH
+        from_port = 22
+        to_port = 22
+        protocol = "tcp"
+        cidr_blocks = ["${var.vpc_cidr}"]
+    }
+	
 
     vpc_id = "${aws_vpc.default.id}"
 
@@ -53,18 +66,6 @@ resource "aws_instance" "web-1" {
     subnet_id = "${aws_subnet.us-east-1-public.id}"
     source_dest_check = false
     associate_public_ip_address = true
-	
-	# provisioner "file" {
-		# source      = "script/script1.sh"
-		# destination = "/tmp/script1.sh"
-		
-		# connection {
-			# type		= "ssh"
-			# user		= "ec2-user"
-			# #private_key	= "${file(var.private_key_path)}"
-			# timeout		= "10m"
-		# }
-	# }
 	
     tags {Name = "Web Server 1"}
 }

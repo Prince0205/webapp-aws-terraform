@@ -5,7 +5,7 @@ resource "aws_vpc" "default" {
 }
 
 resource "aws_internet_gateway" "default" {
-    vpc_id = "${aws_vpc.default.id}"
+	vpc_id = "${aws_vpc.default.id}"
 	tags {Name = "InternetGateway"}
 }
 
@@ -21,19 +21,19 @@ resource "aws_security_group" "nat" {
         from_port = 80
         to_port = 80
         protocol = "tcp"
-        cidr_blocks = ["${var.private_subnet_cidr}"]
+        cidr_blocks = ["${var.vpc_cidr}"]
     }
     ingress {
         from_port = 443
         to_port = 443
         protocol = "tcp"
-        cidr_blocks = ["${var.private_subnet_cidr}"]
+        cidr_blocks = ["${var.vpc_cidr}"]
 	}
 	ingress {
         from_port = 22
         to_port = 22
         protocol = "tcp"
-        cidr_blocks = ["${var.private_subnet_cidr}"]
+        cidr_blocks = ["${var.vpc_cidr}"]
     }
     ingress {
         from_port = 22
@@ -89,20 +89,6 @@ resource "aws_instance" "nat" {
     subnet_id = "${aws_subnet.us-east-1-public.id}"
     associate_public_ip_address = true
     source_dest_check = false
-	
-	
-	# provisioner "file" {
-		# source      = "script/script1.sh"
-		# destination = "/tmp/script1.sh"
-		
-		# connection {
-			# type		= "ssh"
-			# user		= "ec2-user"
-			# private_key	= "${file(var.private_key_path)}"
-			# timeout		= "10m"
-		# }
-	# }
-
 	
     tags {Name = "VPC NAT"}
 }
