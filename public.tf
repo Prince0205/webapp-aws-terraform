@@ -28,7 +28,7 @@ resource "aws_security_group" "web" {
         from_port = 22
         to_port = 22
         protocol = "tcp"
-        cidr_blocks = ["${var.vpc_cidr}"]
+        cidr_blocks = ["0.0.0.0/0"]
     }
 
     egress { # SQL Server
@@ -47,7 +47,7 @@ resource "aws_security_group" "web" {
         from_port = 22
         to_port = 22
         protocol = "tcp"
-        cidr_blocks = ["${var.vpc_cidr}"]
+        cidr_blocks = ["0.0.0.0/0"]
     }
 	
 
@@ -66,6 +66,20 @@ resource "aws_instance" "web-1" {
     subnet_id = "${aws_subnet.us-east-1-public.id}"
     source_dest_check = false
     associate_public_ip_address = true
+	provisioner "remote-exec" {
+		inline = [
+			"sudo hostnamectl set-hostname web-server",
+			"echo '10.0.0.10	nat' >> /etc/hosts",
+			"echo '10.0.0.100	web-server' >> /etc/hosts",
+			"echo '10.0.1.100	db-server' >> /etc/hosts"
+		]
+		
+		connection {
+			type		= "ssh"
+			user		= "ec2-user"
+			agent		= true
+		}
+	}
 	
     tags {Name = "Web Server 1"}
 }

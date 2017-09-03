@@ -30,14 +30,14 @@ resource "aws_security_group" "db" {
         from_port = 22
         to_port = 22
         protocol = "tcp"
-        cidr_blocks = ["${var.vpc_cidr}"]
+        cidr_blocks = ["0.0.0.0/0"]
     }
 
     ingress {
         from_port = -1
         to_port = -1
         protocol = "icmp"
-        cidr_blocks = ["${var.vpc_cidr}"]
+        cidr_blocks = ["0.0.0.0/0"]
     }
 
     egress {
@@ -57,7 +57,7 @@ resource "aws_security_group" "db" {
         from_port = 22
         to_port = 22
         protocol = "tcp"
-        cidr_blocks = ["${var.vpc_cidr}"]
+        cidr_blocks = ["0.0.0.0/0"]
     }
 
     vpc_id = "${aws_vpc.default.id}"
@@ -74,6 +74,20 @@ resource "aws_instance" "db-1" {
 	vpc_security_group_ids = ["${aws_security_group.db.id}"]
 	subnet_id = "${aws_subnet.us-east-1-private.id}"
 	source_dest_check = false
-
+	provisioner "remote-exec" {
+		inline = [
+			"sudo hostnamectl set-hostname db-server",
+			"sudo echo '10.0.0.10	nat' >> /etc/hosts",
+			"sudo echo '10.0.0.100	web-server' >> /etc/hosts",
+			"sudo echo '10.0.1.100	db-server' >> /etc/hosts"
+		]
+		
+		connection {
+			type		= "ssh"
+			user		= "ec2-user"
+			agent		= true
+		}
+	}
+	
     tags {Name = "DB Server 1"}
 }

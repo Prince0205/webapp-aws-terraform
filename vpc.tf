@@ -33,12 +33,6 @@ resource "aws_security_group" "nat" {
         from_port = 22
         to_port = 22
         protocol = "tcp"
-        cidr_blocks = ["${var.vpc_cidr}"]
-    }
-    ingress {
-        from_port = 22
-        to_port = 22
-        protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
     ingress {
@@ -83,12 +77,28 @@ resource "aws_instance" "nat" {
 	# amzn-ami-vpc-nat-hvm-2017.03.0.20170401-x86_64-ebs
 	# Amazon Linux AMI 2017.03.0.20170401 x86_64 VPC NAT HVM EBS
     availability_zone = "us-east-1b"
+	private_ip = "10.0.0.10"
     instance_type = "t2.micro"
     key_name = "${var.key_name}"
     vpc_security_group_ids = ["${aws_security_group.nat.id}"]
     subnet_id = "${aws_subnet.us-east-1-public.id}"
     associate_public_ip_address = true
     source_dest_check = false
+
+	provisioner "remote-exec" {
+		inline = [
+			"sudo hostname nat",
+			"echo '10.0.0.10	nat' >> /etc/hosts",
+			"echo '10.0.0.100	web-server' >> /etc/hosts",
+			"echo '10.0.1.100	db-server' >> /etc/hosts"
+		]
+		
+		connection {
+			type		= "ssh"
+			user		= "ec2-user"
+			agent		= true
+		}
+	}
 	
     tags {Name = "VPC NAT"}
 }
