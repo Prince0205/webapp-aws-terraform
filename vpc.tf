@@ -84,13 +84,30 @@ resource "aws_instance" "nat" {
     subnet_id = "${aws_subnet.us-east-1-public.id}"
     associate_public_ip_address = true
     source_dest_check = false
-
+	
+	provisioner "file" {
+		source      = "script/"
+		destination = "$HOME/script/"
+		
+		connection {
+			type		= "ssh"
+			user		= "ec2-user"
+			agent		= true
+		}
+	
+	}
+	
 	provisioner "remote-exec" {
-		inline = [
-			"sudo hostname nat",
-			"echo '10.0.0.10	nat' >> /etc/hosts",
-			"echo '10.0.0.100	web-server' >> /etc/hosts",
-			"echo '10.0.1.100	db-server' >> /etc/hosts"
+		inline = [	
+			"mkdir script",
+			"sudo mv *.sh script/",
+			"echo 'Change permission for exucution'",
+			"sudo chmod 777 /$HOME/script/*",
+			"echo '[Permission changed succsefully on all files /home/ec2-user]'",
+			"ls -lart /$HOME/script/",
+			"echo '[Start provisining...]'",
+			"cd /$HOME/script",
+			"./install_nat.sh"
 		]
 		
 		connection {

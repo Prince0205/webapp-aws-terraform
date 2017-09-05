@@ -74,18 +74,43 @@ resource "aws_instance" "db-1" {
 	vpc_security_group_ids = ["${aws_security_group.db.id}"]
 	subnet_id = "${aws_subnet.us-east-1-private.id}"
 	source_dest_check = false
+	
+	# copy scripts to $HOME directory
+	provisioner "file" {
+		source      = "script/"
+		destination = "$HOME/"
+		
+		connection {
+			host				= "${aws_instance.db-1.private_ip}"
+			type				= "ssh"
+			user				= "ec2-user"
+	        bastion_host 		= "${aws_eip.web-1.public_ip}"
+			bastion_user		= "ec2-user"
+			agent				= true
+		}
+	}
+	
 	provisioner "remote-exec" {
 		inline = [
-			"sudo hostnamectl set-hostname db-server",
-			"sudo echo '10.0.0.10	nat' >> /etc/hosts",
-			"sudo echo '10.0.0.100	web-server' >> /etc/hosts",
-			"sudo echo '10.0.1.100	db-server' >> /etc/hosts"
+			"mkdir script",
+			"sudo mv *.sh script/",
+			"echo 'Change permission for exucution'",
+			"sudo chmod 777 /$HOME/script/*",
+			"echo '[Permission changed succsefully on all files /$HOME]'",
+			"ls -lart /$HOME/script/",
+			"echo '[Start provisining...]'",
+			"cd /$HOME/script",
+			"./install_db.sh",
 		]
 		
 		connection {
-			type		= "ssh"
-			user		= "ec2-user"
-			agent		= true
+		# connect thourh NAT instance
+			host				= "${aws_instance.db-1.private_ip}"
+			type				= "ssh"
+			user				= "ec2-user"
+	        bastion_host 		= "${aws_eip.web-1.public_ip}"
+			bastion_user		= "ec2-user"
+			agent				= true
 		}
 	}
 	

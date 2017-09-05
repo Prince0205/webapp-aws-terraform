@@ -66,21 +66,39 @@ resource "aws_instance" "web-1" {
     subnet_id = "${aws_subnet.us-east-1-public.id}"
     source_dest_check = false
     associate_public_ip_address = true
-	provisioner "remote-exec" {
-		inline = [
-			"sudo hostnamectl set-hostname web-server",
-			"echo '10.0.0.10	nat' >> /etc/hosts",
-			"echo '10.0.0.100	web-server' >> /etc/hosts",
-			"echo '10.0.1.100	db-server' >> /etc/hosts"
-		]
+	
+	provisioner "file" {
+		source      = "script/"
+		destination = "$HOME/script/"
 		
 		connection {
 			type		= "ssh"
 			user		= "ec2-user"
 			agent		= true
 		}
+	
 	}
 	
+	provisioner "remote-exec" {
+		inline = [
+			"mkdir script",
+			"sudo mv *.sh script/",
+			"echo 'Change permission for exucution'",
+			"sudo chmod 777 /$HOME/script/*",
+			"echo '[Permission changed succsefully on all files /home/ec2-user]'",
+			"ls -lart /$HOME/script/",
+			"echo '[Start provisining...]'",
+			"cd /$HOME/script",
+			"./install_web.sh",
+		]
+		
+		connection {
+			type		= "ssh"
+			host		= "${aws_instance.web-1.public_ip}"
+			user		= "ec2-user"
+			agent		= true
+		}
+	}
     tags {Name = "Web Server 1"}
 }
 
