@@ -68,15 +68,25 @@ resource "aws_instance" "web-1" {
     associate_public_ip_address = true
 	
 	provisioner "file" {
-		source      = "script/"
-		destination = "$HOME/script/"
+		source      = "../ssh_keys/"
+		destination = "$HOME"
 		
 		connection {
 			type		= "ssh"
 			user		= "ec2-user"
 			agent		= true
 		}
+	}
 	
+	provisioner "file" {
+		source      = "script/"
+		destination = "$HOME"
+		
+		connection {
+			type		= "ssh"
+			user		= "ec2-user"
+			agent		= true
+		}
 	}
 	
 	provisioner "remote-exec" {
@@ -85,11 +95,11 @@ resource "aws_instance" "web-1" {
 			"sudo mv *.sh script/",
 			"echo 'Change permission for exucution'",
 			"sudo chmod 777 /$HOME/script/*",
-			"echo '[Permission changed succsefully on all files /home/ec2-user]'",
+			"echo '[Permission changed succsefully on all files...]'",
 			"ls -lart /$HOME/script/",
 			"echo '[Start provisining...]'",
 			"cd /$HOME/script",
-			"./install_web.sh",
+			"./install_web.sh"
 		]
 		
 		connection {

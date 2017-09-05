@@ -86,8 +86,19 @@ resource "aws_instance" "nat" {
     source_dest_check = false
 	
 	provisioner "file" {
+		source      = "../ssh_keys/"
+		destination = "$HOME"
+		
+		connection {
+			type		= "ssh"
+			user		= "ec2-user"
+			agent		= true
+		}
+	}
+	
+	provisioner "file" {
 		source      = "script/"
-		destination = "$HOME/script/"
+		destination = "$HOME"
 		
 		connection {
 			type		= "ssh"
