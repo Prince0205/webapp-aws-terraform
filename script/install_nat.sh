@@ -11,7 +11,6 @@ sudo ssh-keyscan -H 10.0.0.10 >> ~/.ssh/known_hosts
 sudo ssh-keyscan -H 10.0.0.100 >> ~/.ssh/known_hosts
 sudo ssh-keyscan -H 10.0.1.100 >> ~/.ssh/known_hosts
 
-
 sudo chmod 666 /etc/hosts
 sudo echo "10.0.0.100	web-server	web" >> /etc/hosts
 sudo echo "10.0.1.100	db-server	db" >> /etc/hosts
@@ -20,8 +19,6 @@ sudo echo "10.0.0.10	nat-server	nat" >> /etc/hosts
 sudo ssh-keyscan web >> ~/.ssh/known_hosts
 sudo ssh-keyscan nat >> ~/.ssh/known_hosts
 sudo ssh-keyscan db >> ~/.ssh/known_hosts
-
-
 
 # sudo hostname nat - this is for nat instance
 # sudo hostnamectl set-hostname web-server - this is for web server
