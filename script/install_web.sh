@@ -23,6 +23,10 @@ sudo ssh-keyscan web >> ~/.ssh/known_hosts
 sudo ssh-keyscan nat >> ~/.ssh/known_hosts
 sudo ssh-keyscan db >> ~/.ssh/known_hosts
 
+sudo ssh-keyscan 10.0.0.100 >> ~/.ssh/known_hosts
+sudo ssh-keyscan 10.0.1.100 >> ~/.ssh/known_hosts
+sudo ssh-keyscan 10.0.0.10 >> ~/.ssh/known_hosts
+
 
 
 
