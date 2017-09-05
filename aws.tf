@@ -10,10 +10,10 @@ resource "aws_key_pair" "ljubon-key-webapp" {
 }
 
 # test
-output "Public_Web-1" {
+output "public_web" {
 	value = "${aws_eip.web-1.public_ip}"
 }
-output "Public_NAT_GW" {
+output "public_nat" {
 	value = "${aws_eip.nat.public_ip}"
 }
 output "Private_Web-1" {
