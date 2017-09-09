@@ -72,9 +72,8 @@ resource "aws_security_group" "nat" {
 }
 
 resource "aws_instance" "nat" {
-    ami = "ami-293a183f" # this is a special ami preconfigured to do NAT
-	#  https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#LaunchInstanceWizard:
-	# amzn-ami-vpc-nat-hvm-2017.03.0.20170401-x86_64-ebs
+    ami = "ami-293a183f" 
+	# this is a special ami preconfigured to do NAT
 	# Amazon Linux AMI 2017.03.0.20170401 x86_64 VPC NAT HVM EBS
     availability_zone = "us-east-1b"
 	private_ip = "10.0.0.10"
