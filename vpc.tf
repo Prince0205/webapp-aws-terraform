@@ -84,16 +84,16 @@ resource "aws_instance" "nat" {
     associate_public_ip_address = true
     source_dest_check = false
 	
-	provisioner "file" {
-		source      = "../ssh_keys/"
-		destination = "$HOME"
+	# provisioner "file" {
+		# source      = "../ssh_keys/"
+		# destination = "$HOME"
 		
-		connection {
-			type		= "ssh"
-			user		= "ec2-user"
-			agent		= true
-		}
-	}
+		# connection {
+			# type		= "ssh"
+			# user		= "ec2-user"
+			# agent		= true
+		# }
+	# }
 	
 	provisioner "file" {
 		source      = "script/"

@@ -75,19 +75,19 @@ resource "aws_instance" "db-1" {
 	subnet_id = "${aws_subnet.us-east-1-private.id}"
 	source_dest_check = false
 	
-	provisioner "file" {
-		source      = "../ssh_keys/"
-		destination = "$HOME"
+	# provisioner "file" {
+		# source      = "../ssh_keys/"
+		# destination = "$HOME"
 		
-		connection {
-			host				= "${aws_instance.db-1.private_ip}"
-			type				= "ssh"
-			user				= "ec2-user"
-	        bastion_host 		= "${aws_eip.web-1.public_ip}"
-			bastion_user		= "ec2-user"
-			agent				= true
-		}
-	}
+		# connection {
+			# host				= "${aws_instance.db-1.private_ip}"
+			# type				= "ssh"
+			# user				= "ec2-user"
+	        # bastion_host 		= "${aws_eip.web-1.public_ip}"
+			# bastion_user		= "ec2-user"
+			# agent				= true
+		# }
+	# }
 	
 	# copy scripts to $HOME directory
 	provisioner "file" {

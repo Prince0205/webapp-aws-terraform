@@ -67,16 +67,16 @@ resource "aws_instance" "web-1" {
     source_dest_check = false
     associate_public_ip_address = true
 	
-	provisioner "file" {
-		source      = "../ssh_keys/"
-		destination = "$HOME"
+	# provisioner "file" {
+		# source      = "../ssh_keys/"
+		# destination = "$HOME"
 		
-		connection {
-			type		= "ssh"
-			user		= "ec2-user"
-			agent		= true
-		}
-	}
+		# connection {
+			# type		= "ssh"
+			# user		= "ec2-user"
+			# agent		= true
+		# }
+	# }
 	
 	provisioner "file" {
 		source      = "script/"
