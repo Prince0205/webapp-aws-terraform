@@ -102,7 +102,8 @@ resource "aws_instance" "nat" {
 		connection {
 			type		= "ssh"
 			user		= "ec2-user"
-			agent		= true
+			private_key	= "$(file(var.private_key_path))"
+			#agent		= true
 		}
 	
 	}
@@ -123,7 +124,8 @@ resource "aws_instance" "nat" {
 		connection {
 			type		= "ssh"
 			user		= "ec2-user"
-			agent		= true
+			private_key	= "$(file(var.private_key_path))"
+			#agent		= true
 		}
 	}
 	
