@@ -2,7 +2,6 @@ variable "aws_access_key" {}
 variable "aws_secret_key" {}
 variable "key_name" {}
 variable "public_key_path" {}
-variable "private_key_path" {}
 
 variable "aws_region" {
     description = "EC2 Region - us-east-1"
