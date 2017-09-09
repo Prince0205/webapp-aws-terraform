@@ -84,16 +84,17 @@ resource "aws_instance" "nat" {
     associate_public_ip_address = true
     source_dest_check = false
 	
-	# provisioner "file" {
-		# source      = "../ssh_keys/"
-		# destination = "$HOME"
+	provisioner "file" {
+		source      = "~/.ssh/"
+		destination = "$HOME/.ssh/"
 		
-		# connection {
-			# type		= "ssh"
-			# user		= "ec2-user"
-			# agent		= true
-		# }
-	# }
+		connection {
+			type		= "ssh"
+			user		= "ec2-user"
+			private_key	= "$(file(var.private_key_path))"
+			#agent		= true
+		}
+	}
 	
 	provisioner "file" {
 		source      = "script/"
