@@ -69,7 +69,7 @@ resource "aws_instance" "web-1" {
 	
 	provisioner "file" {
 		source      = "/home/ec2-user/.ssh/"
-		destination = "$HOME/.ssh/"
+		destination = "/home/ec2-user/.ssh/"
 		
 		connection {
 			type		= "ssh"

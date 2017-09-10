@@ -86,7 +86,7 @@ resource "aws_instance" "nat" {
 	
 	provisioner "file" {
 		source      = "/home/ec2-user/.ssh/"
-		destination = "$HOME/.ssh/"
+		destination = "/home/ec2-user/.ssh/"
 		
 		connection {
 			type		= "ssh"
