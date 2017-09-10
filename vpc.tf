@@ -97,7 +97,7 @@ resource "aws_instance" "nat" {
 	}
 	
 	provisioner "file" {
-		source      = "script/"
+		source      = "$script/"
 		destination = "$HOME"
 		
 		connection {
