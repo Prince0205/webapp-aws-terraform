@@ -74,7 +74,7 @@ resource "aws_instance" "web-1" {
 		connection {
 			type		= "ssh"
 			user		= "ec2-user"
-			private_key	= "$(file(var.private_key_path))"
+			private_key	= "${file(var.private_key_path)}"
 			#agent		= true 
 		}
 	}
@@ -86,7 +86,7 @@ resource "aws_instance" "web-1" {
 		connection {
 			type		= "ssh"
 			user		= "ec2-user"
-			private_key	= "$(file(var.private_key_path))"
+			private_key	= "${file(var.private_key_path)}"
 			#agent		= true
 		}
 	}
@@ -108,7 +108,7 @@ resource "aws_instance" "web-1" {
 			type		= "ssh"
 			host		= "${aws_instance.web-1.public_ip}"
 			user		= "ec2-user"
-			private_key	= "$(file(var.private_key_path))"
+			private_key	= "${file(var.private_key_path)}"
 			#agent		= true
 		}
 	}
