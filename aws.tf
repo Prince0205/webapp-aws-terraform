@@ -15,6 +15,7 @@ output "public_web" {
 output "public_nat" {
 	value = "${aws_eip.nat.public_ip}"
 }
+
 output "private_web" {
 	value = "${aws_instance.web-1.private_ip}"
 }
