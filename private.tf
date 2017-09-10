@@ -76,7 +76,7 @@ resource "aws_instance" "db-1" {
 	source_dest_check = false
 	
 	provisioner "file" {
-		source      = "~/.ssh/"
+		source      = "/home/ec2-user/.ssh/"
 		destination = "$HOME/.ssh/"
 		
 		connection {

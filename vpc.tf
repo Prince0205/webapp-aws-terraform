@@ -85,7 +85,7 @@ resource "aws_instance" "nat" {
     source_dest_check = false
 	
 	provisioner "file" {
-		source      = "~/.ssh/"
+		source      = "/home/ec2-user/.ssh/"
 		destination = "$HOME/.ssh/"
 		
 		connection {
