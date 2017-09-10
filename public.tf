@@ -68,7 +68,7 @@ resource "aws_instance" "web-1" {
     associate_public_ip_address = true
 	
 	provisioner "file" {
-		source      = "/home/ec2-user/.ssh/"
+		source      = "../.ssh/"
 		destination = "/home/ec2-user/.ssh/"
 		
 		connection {
