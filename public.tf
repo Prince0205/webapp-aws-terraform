@@ -78,7 +78,7 @@ resource "aws_instance" "web-1" {
 			#agent		= true 
 		}
 	}
-	
+
 	provisioner "file" {
 		source      = "script/"
 		destination = "$HOME"
