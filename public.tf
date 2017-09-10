@@ -75,7 +75,7 @@ resource "aws_instance" "web-1" {
 			type		= "ssh"
 			user		= "ec2-user"
 			private_key	= "$(file(var.private_key_path))"
-			#agent		= true
+			#agent		= true 
 		}
 	}
 	
