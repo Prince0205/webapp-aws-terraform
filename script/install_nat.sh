@@ -7,10 +7,6 @@ sudo hostname nat-server
 echo "New hostname is: $(hostname -f)"
 echo "*****************DONE CONFIGURATION DB-SERVER*****************"
 
-sudo ssh-keyscan -H 10.0.0.10 >> ~/.ssh/known_hosts
-sudo ssh-keyscan -H 10.0.0.100 >> ~/.ssh/known_hosts
-sudo ssh-keyscan -H 10.0.1.100 >> ~/.ssh/known_hosts
-
 sudo chmod 666 /etc/hosts
 sudo echo "10.0.0.100	web-server	web" >> /etc/hosts
 sudo echo "10.0.1.100	db-server	db" >> /etc/hosts
