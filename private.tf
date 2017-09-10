@@ -95,7 +95,7 @@ resource "aws_instance" "db-1" {
 	provisioner "file" {
 		source      = "script/"
 		destination = "$HOME"
-
+		
 		connection {
 			host				= "${aws_instance.db-1.private_ip}"
 			type				= "ssh"
