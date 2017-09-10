@@ -10,6 +10,7 @@ variable "aws_region" {
     default = "us-east-1"
 }
 
+
 variable "amis" {
 	description = "AMIs by region"
 	default = "ami-c998b6b2" # RedHat 14.04 LTS
