@@ -14,7 +14,7 @@ variable "amis" {
 	description = "AMIs by region"
 	default = "ami-c998b6b2" # RedHat 14.04 LTS
 }
-		
+	
 variable "vpc_cidr" {
     description = "CIDR for the whole VPC"
     default = "10.0.0.0/16"
