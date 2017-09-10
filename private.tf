@@ -80,10 +80,14 @@ resource "aws_instance" "db-1" {
 		destination = "$HOME/.ssh/"
 		
 		connection {
-			type		= "ssh"
-			user		= "ec2-user"
-			private_key	= "${file(var.private_key_path)}"
-			#agent		= true
+			host				= "${aws_instance.db-1.private_ip}"
+			type				= "ssh"
+			user				= "ec2-user"
+			private_key			= "${file(var.private_key_path)}"
+	        bastion_host 		= "${aws_eip.web-1.public_ip}"
+			bastion_user		= "ec2-user"
+			bastion_private_key	= "${file(var.private_key_path)}"
+			#agent				= true
 		}
 	}
 	
