@@ -7,7 +7,8 @@ variable "private_key_path" {}
 
 variable "aws_region" {
     description = "EC2 Region - us-east-1"
-    default = "us-east-1"
+    #default = "us-east-1"    # N. Virginia
+    default = "eu-central-1"  # Frankfurt
 }
 
 variable "availability_zone" {
