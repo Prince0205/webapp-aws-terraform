@@ -2,7 +2,6 @@
   Database Servers
 */
 
-
 resource "aws_security_group" "db" {
     name = "vpc_db"
     description = "Allow incoming database connections."
