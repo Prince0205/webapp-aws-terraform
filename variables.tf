@@ -10,10 +10,17 @@ variable "aws_region" {
     default = "us-east-1"
 }
 
+variable "availability_zone" {
+  description = "Availability zone for instances"
+  #default = "us-east-1b"   # N. Virginia
+  default = "eu-central-1a" # Frankfurt
+
+}
 
 variable "amis" {
 	description = "AMIs by region"
-	default = "ami-c998b6b2" # RedHat 14.04 LTS
+	#default = "ami-c998b6b2" # RedHat 14.04 LTS N. Virginia
+	default = "ami-d74be5b8" # RedHat 14.04 LTS Frankfurt
 }
 
 

@@ -61,7 +61,7 @@ resource "aws_security_group" "db" {
 
 resource "aws_instance" "db-1" {
 	ami = "${var.amis}"
-	availability_zone = "us-east-1b"
+	availability_zone = "${var.availability_zone}"
 	private_ip = "10.0.1.100"
 	instance_type = "t2.micro"
 	key_name = "${var.key_name}"

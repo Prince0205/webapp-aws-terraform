@@ -75,7 +75,7 @@ resource "aws_instance" "nat" {
     ami = "ami-293a183f" 
 	# this is a special ami preconfigured to do NAT
 	# Amazon Linux AMI 2017.03.0.20170401 x86_64 VPC NAT HVM EBS
-    availability_zone = "us-east-1b"
+    availability_zone = "${var.availability_zone}"
 	private_ip = "10.0.0.10"
     instance_type = "t2.micro"
     key_name = "${var.key_name}"
@@ -133,7 +133,7 @@ resource "aws_subnet" "us-east-1-public" {
     vpc_id = "${aws_vpc.default.id}"
 
     cidr_block = "${var.public_subnet_cidr}"
-    availability_zone = "us-east-1b"
+    availability_zone = "${var.availability_zone}"
 
     tags {Name = "Public Subnet"}
 }
@@ -162,7 +162,7 @@ resource "aws_subnet" "us-east-1-private" {
     vpc_id = "${aws_vpc.default.id}"
 
     cidr_block = "${var.private_subnet_cidr}"
-    availability_zone = "us-east-1b"
+    availability_zone = "${var.availability_zone}"
 
     tags {Name = "Private Subnet"}
 }
