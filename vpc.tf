@@ -93,13 +93,24 @@ resource "aws_instance" "nat" {
 			user		= "ec2-user"
 			private_key	= "${file(var.private_key_path)}"
 		}
-	}
-	
+	} # script and jenkins
+    provisioner "file" {
+      source      = "ansible/"
+      destination = "$HOME"
+
+      connection {
+        type		= "ssh"
+        user		= "ec2-user"
+        private_key	= "${file(var.private_key_path)}"
+      }
+    } # ansible
 	provisioner "remote-exec" {
 		inline = [	
 			"mkdir script",
+			"mkdir ansible",
 			"sudo mv *.sh script/",
 			"sudo mv jenkins* /home/ec2-user/.ssh/",
+			"sudo mv -t ansible/ ansible.cfg inventory web.yaml",
 			"echo 'Change permission for exucution'",
 			"sudo chmod 777 /$HOME/script/*",
 			"echo '[Permission changed succsefully on all files /home/ec2-user]'",
