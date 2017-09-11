@@ -8,6 +8,8 @@ echo "New hostname is: $(hostname -f)"
 echo "*****************DONE CONFIGURATION DB-SERVER*****************"
 
 sudo chmod 666 /etc/hosts
+sudo chmod 400 ~/.ssh/jenkins
+
 sudo echo "10.0.0.100 web-server web" >> /etc/hosts
 sudo echo "10.0.1.100 db-server db" >> /etc/hosts
 sudo echo "10.0.0.10 nat-server nat" >> /etc/hosts
@@ -34,13 +36,3 @@ sudo easy_install pip
 sudo pip install ansible
 echo "$(ansible --version)"
 echo "*****************FINISH ANSIBLE*****************"
-
-# sudo usermod -a -G root jenkins
-# sudo vi /etc/sysconfig/jenkins
-# change JENKINS_LISTEN_ADDRESS="0.0.0.0"
-# ssh-keyscan -H [hostname],[ip_address] >> ~/.ssh/known_hosts
-# ssh -o StrictHostKeyChecking=no username@hostname.com
-# sudo cat /etc/sudoers
-# add jenkins user
-# useradd myNewUser
-# sudo myNewUser

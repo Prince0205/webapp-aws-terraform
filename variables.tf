@@ -19,7 +19,7 @@ variable "availability_zone" {
 variable "amis" {
 	description = "AMIs by region"
 	#default = "ami-c998b6b2" # RedHat 14.04 LTS N. Virginia
-	default = "ami-b646bbd9" # RedHat 14.04 LTS Frankfurt -> amzn-ami-vpc-nat-hvm-2016.09.0.20160923-x86_64-ebs
+	default = "ami-d74be5b8" # RedHat 14.04 LTS Frankfurt -> amzn-ami-vpc-nat-hvm-2016.09.0.20160923-x86_64-ebs
 }
 
 variable "amis-nat" {
