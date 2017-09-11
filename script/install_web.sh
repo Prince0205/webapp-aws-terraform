@@ -1,7 +1,3 @@
-echo "*****************EPEL RELEASE*****************"
-sudo cd $HOME
-echo "*****************FINISH EPEL RELEASE*****************"
-
 echo "*****************CONFIGURE RHEL*****************"
 echo "Change hostname"
 sudo hostnamectl set-hostname web-server

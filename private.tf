@@ -93,7 +93,7 @@ resource "aws_instance" "db-1" {
 			"sudo mv jenkins* /home/ec2-user/.ssh/",
 			"echo 'Change permission for exucution'",
 			"sudo chmod 777 /$HOME/script/*",
-			"echo '[Permission changed succsefully on all files /$HOME]'",
+			"echo '[Permission changed succsefully on all files /$HOME/script/]'",
 			"ls -lart /$HOME/script/",
 			"echo '[Start provisining...]'",
 			"cd /$HOME/script",

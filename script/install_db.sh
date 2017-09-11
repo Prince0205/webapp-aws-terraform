@@ -1,7 +1,3 @@
-echo "*****************EPEL RELEASE*****************"
-sudo cd $HOME
-echo "*****************FINISH EPEL RELEASE*****************"
-
 echo "*****************CONFIGURE RHEL*****************"
 sudo hostnamectl set-hostname db-server
 #sudo hostname db-server
