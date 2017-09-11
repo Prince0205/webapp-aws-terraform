@@ -85,16 +85,14 @@ resource "aws_instance" "nat" {
     source_dest_check = false
 	
 	provisioner "file" {
-		source      = "$script/"
+		source      = "script/"
 		destination = "$HOME"
 		
 		connection {
 			type		= "ssh"
 			user		= "ec2-user"
 			private_key	= "${file(var.private_key_path)}"
-			#agent		= true
 		}
-	
 	}
 	
 	provisioner "remote-exec" {
