@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 echo "*****************CONFIGURE RHEL*****************"
 sudo hostnamectl set-hostname db-server
 #sudo hostname db-server

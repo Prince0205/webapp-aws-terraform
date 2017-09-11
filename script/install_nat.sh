@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 echo "*****************EPEL RELEASE*****************"
 sudo cd $HOME
 echo "*****************FINISH EPEL RELEASE*****************"

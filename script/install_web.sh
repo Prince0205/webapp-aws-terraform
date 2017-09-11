@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 echo "*****************CONFIGURE RHEL*****************"
 echo "Change hostname"
 sudo hostnamectl set-hostname web-server
