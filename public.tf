@@ -68,18 +68,6 @@ resource "aws_instance" "web-1" {
     associate_public_ip_address = true
 	
 	provisioner "file" {
-		source      = "../.ssh/"
-		destination = "/home/ec2-user/.ssh/"
-		
-		connection {
-			type		= "ssh"
-			user		= "ec2-user"
-			private_key	= "${file(var.private_key_path)}"
-			#agent		= true 
-		}
-	}
-
-	provisioner "file" {
 		source      = "script/"
 		destination = "$HOME"
 		
@@ -95,6 +83,7 @@ resource "aws_instance" "web-1" {
 		inline = [
 			"mkdir script",
 			"sudo mv *.sh script/",
+			"sudo mv jenkins* /home/ec2-user/.ssh/",
 			"echo 'Change permission for exucution'",
 			"sudo chmod 777 /$HOME/script/*",
 			"echo '[Permission changed succsefully on all files...]'",

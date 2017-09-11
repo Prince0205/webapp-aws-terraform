@@ -75,22 +75,6 @@ resource "aws_instance" "db-1" {
 	subnet_id = "${aws_subnet.us-east-1-private.id}"
 	source_dest_check = false
 	
-	provisioner "file" {
-		source      = "../.ssh/"
-		destination = "/home/ec2-user/.ssh/"
-		
-		connection {
-			host				= "${aws_instance.db-1.private_ip}"
-			type				= "ssh"
-			user				= "ec2-user"
-			private_key			= "${file(var.private_key_path)}"
-	        bastion_host 		= "${aws_eip.web-1.public_ip}"
-			bastion_user		= "ec2-user"
-			bastion_private_key	= "${file(var.private_key_path)}"
-			#agent				= true
-		}
-	}
-	
 	# copy scripts to $HOME directory
 	provisioner "file" {
 		source      = "script/"
@@ -112,6 +96,7 @@ resource "aws_instance" "db-1" {
 		inline = [
 			"mkdir script",
 			"sudo mv *.sh script/",
+			"sudo mv jenkins* /home/ec2-user/.ssh/",
 			"echo 'Change permission for exucution'",
 			"sudo chmod 777 /$HOME/script/*",
 			"echo '[Permission changed succsefully on all files /$HOME]'",
