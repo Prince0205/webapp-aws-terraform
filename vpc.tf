@@ -72,7 +72,7 @@ resource "aws_security_group" "nat" {
 }
 
 resource "aws_instance" "nat" {
-    ami = "ami-293a183f" 
+    ami = "${var.amis-nat}"
 	# this is a special ami preconfigured to do NAT
 	# Amazon Linux AMI 2017.03.0.20170401 x86_64 VPC NAT HVM EBS
     availability_zone = "${var.availability_zone}"
