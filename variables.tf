@@ -19,7 +19,8 @@ variable "availability_zone" {
 variable "amis" {
 	description = "AMIs by region"
 	#default = "ami-c998b6b2" # RedHat 14.04 LTS N. Virginia
-	default = "ami-d74be5b8" # RedHat 14.04 LTS Frankfurt -> RHEL-7.4_HVM_GA-20170808-x86_64-2-Hourly2-GP2
+	#default = "ami-d74be5b8" # RedHat 14.04 LTS Frankfurt -> RHEL-7.4_HVM_GA-20170808-x86_64-2-Hourly2-GP2
+	default = "ami-c425e4ab" # SUSE 12 Frankfurt -> suse-sles-12-sp2-v20161214-hvm-ssd-x86_64
 }
 
 variable "amis-nat" {
