@@ -4,6 +4,7 @@ echo "*****************FINISH EPEL RELEASE*****************"
 
 echo "*****************CONFIGURE RHEL*****************"
 sudo hostnamectl set-hostname db-server
+#sudo hostname db-server
 echo "New hostname is: $(hostnamectl status)"
 echo "*****************DONE CONFIGURATION DB-SERVER*****************"
 

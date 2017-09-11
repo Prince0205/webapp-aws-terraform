@@ -25,7 +25,7 @@ variable "amis" {
 variable "amis-nat" {
   description = "AMIs by region"
   #default = "ami-293a183f" # N. Virginia -> Amazon Linux AMI 2017.03.0.20170401 x86_64 VPC NAT HVM EBS
-  default = "ami-b646bbd9" # Frankfurt -> amzn-ami-vpc-nat-hvm-2016.09.0.20160923-x86_64-ebs
+  default = "ami-d74be5b8" # Frankfurt -> amzn-ami-vpc-nat-hvm-2016.09.0.20160923-x86_64-ebs
 }
 
 
