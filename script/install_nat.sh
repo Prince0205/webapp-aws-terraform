@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 echo "*****************EPEL RELEASE*****************"
-sudo cd $HOME
+sudo cd $HOME/
 echo "*****************FINISH EPEL RELEASE*****************"
 
 echo "*****************CONFIGURE RHEL*****************"
-#sudo hostnamectl set-hostname nat-server
-sudo hostname nat-server
+sudo hostnamectl set-hostname nat-server
+#sudo hostname nat-server
 echo "New hostname is: $(hostname -f)"
 echo "*****************DONE CONFIGURATION DB-SERVER*****************"
 
 sudo chmod 666 /etc/hosts
-sudo chmod 400 ~/.ssh/jenkins
+sudo chmod 600 ~/.ssh/jenkins
+
 
 sudo echo "10.0.0.100 web-server web" >> /etc/hosts
 sudo echo "10.0.1.100 db-server db" >> /etc/hosts
@@ -38,3 +39,12 @@ sudo easy_install pip
 sudo pip install ansible
 echo "$(ansible --version)"
 echo "*****************FINISH ANSIBLE*****************"
+
+#cd /home/ec2-user/webapp-aws-terraform/
+#cp /home/ec2-user/.ssh/jenkins* script/
+#terraform apply
+#terraform output
+#echo "Importing public IP addreses hosts file..."
+#sudo echo "$(terraform output public_nat) nat-server nat" >> /etc/hosts
+#sudo echo "$(terraform output public_web) nat-server nat" >> /etc/hosts
+#echo "Importing DONE"
