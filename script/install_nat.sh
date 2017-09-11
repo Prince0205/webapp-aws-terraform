@@ -3,8 +3,8 @@ sudo cd $HOME
 echo "*****************FINISH EPEL RELEASE*****************"
 
 echo "*****************CONFIGURE RHEL*****************"
-sudo hostnamectl set-hostname nat-server
-#sudo hostname nat-server
+#sudo hostnamectl set-hostname nat-server
+sudo hostname nat-server
 echo "New hostname is: $(hostname -f)"
 echo "*****************DONE CONFIGURATION DB-SERVER*****************"
 
