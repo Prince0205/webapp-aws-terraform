@@ -20,6 +20,7 @@ sudo ssh-keyscan -H 10.0.0.100, web >> ~/.ssh/known_hosts
 sudo ssh-keyscan -H 10.0.1.100, db >> ~/.ssh/known_hosts
 sudo ssh-keyscan -H 10.0.0.10, nat >> ~/.ssh/known_hosts
 
+
 echo "*****************EPEL RELEASE*****************"
 sudo yum -y install wget telnet
 wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-10.noarch.rpm
