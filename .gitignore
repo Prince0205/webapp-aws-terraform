@@ -10,9 +10,11 @@
 
 # Terraform
 *.tfvars
+.idea/
+.terraform/
 
 # Module
-.terraform/*
+
 
 *.pub
 *.ppk
@@ -48,4 +50,4 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
-.idea/
+
