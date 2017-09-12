@@ -16,4 +16,3 @@ sudo echo "10.0.0.10	nat-server	nat" >> /etc/hosts
 sudo ssh-keyscan -H 10.0.0.100, web >> ~/.ssh/known_hosts
 sudo ssh-keyscan -H 10.0.1.100, db >> ~/.ssh/known_hosts
 sudo ssh-keyscan -H 10.0.0.10, nat >> ~/.ssh/known_hosts
-
