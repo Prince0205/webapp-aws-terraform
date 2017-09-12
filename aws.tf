@@ -26,3 +26,4 @@ output "private_nat" {
 	value = "${aws_instance.nat.private_ip}"
 }
 
+#add
