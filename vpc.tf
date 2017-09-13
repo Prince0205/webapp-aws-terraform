@@ -153,7 +153,6 @@ resource "aws_instance" "nat" {
 			#agent		= true
 		}
 	}
-	
     tags {Name = "VPC NAT"}
 }
 
@@ -162,9 +161,11 @@ resource "aws_eip" "nat" {
     vpc = true
 }
 
+
 /*
   Public Subnet
 */
+
 
 resource "aws_subnet" "us-east-1-public" {
     vpc_id = "${aws_vpc.default.id}"
