@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-echo "*****************EPEL RELEASE*****************"
-sudo cd $HOME/
-echo "*****************FINISH EPEL RELEASE*****************"
+
+cd /home/ec2-user/
 
 echo "*****************CONFIGURE RHEL*****************"
 #sudo hostnamectl set-hostname nat-server
 sudo hostname nat-server
 echo "New hostname is: $(hostname -f)"
-echo "*****************DONE CONFIGURATION DB-SERVER*****************"
+echo "*****************DONE CONFIGURATION NAT-SERVER*****************"
 
+ls -lart /home/ec2-users/.ssh/
 sudo chmod 666 /etc/hosts
-sudo chmod 600 ~/.ssh/jenkins
+#sudo chmod 600 ~/.ssh/jenkins
 
 sudo echo "10.0.0.100 web-server web" >> /etc/hosts
 sudo echo "10.0.1.100 db-server db" >> /etc/hosts
@@ -28,7 +28,7 @@ sudo rpm -ivh epel-release-7-10.noarch.rpm
 sudo yum -y install epel-release
 sudo yum -y update
 sudo rm -rf epel-release-7-10.noarch.rpm
-sudo cd $HOME
+cd /home/ec2-user/
 echo "*****************DONE EPEL*****************"
 
 echo "*****************ANSIBLE*****************"
