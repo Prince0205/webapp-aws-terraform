@@ -4,6 +4,8 @@ provider "aws" {
     region 		= "${var.aws_region}"
 }
 
+#test123
+
 resource "aws_key_pair" "ljubon-key-webapp" {
   key_name   = "${var.key_name}"
   public_key = "${file(var.public_key_path)}"
