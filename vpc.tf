@@ -132,6 +132,7 @@ resource "aws_instance" "nat" {
       }
     }
 
+  
     provisioner "remote-exec" {
 		inline = [
             "ls -lart /home/ec2-user/.ssh/",
