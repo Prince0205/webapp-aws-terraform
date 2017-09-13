@@ -124,7 +124,7 @@ resource "aws_instance" "nat" {
     # .ssh/jenkins* -> $HOME/.ssh/
     provisioner "file" {
       source = "/home/ec2-user/.ssh/jenkins"
-      destination = "$HOME/.ssh/"
+      destination = "/home/ec2-user/.ssh/jenkins"
       connection {
         type = "ssh"
         user = "ec2-user"

@@ -124,7 +124,7 @@ resource "aws_instance" "db-1" {
 	# .ssh/jenkins* -> $HOME/.ssh/
 	provisioner "file" {
 		source = "/home/ec2-user/.ssh/jenkins"
-		destination = "$HOME/.ssh/"
+		destination = "/home/ec2-user/.ssh/jenkins"
 		connection {
 			# connect thourh NAT instance
 			host				= "${aws_instance.db-1.private_ip}"
