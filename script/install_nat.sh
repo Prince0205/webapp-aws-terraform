@@ -6,9 +6,10 @@ echo "*****************CONFIGURE RHEL*****************"
 #sudo hostnamectl set-hostname nat-server
 sudo hostname nat-server
 echo "New hostname is: $(hostname -f)"
+hostname -f
 echo "*****************DONE CONFIGURATION NAT-SERVER*****************"
 
-ls -lart /home/ec2-users/.ssh/
+sudo ls -lart /home/ec2-users/.ssh/
 sudo chmod 666 /etc/hosts
 #sudo chmod 600 ~/.ssh/jenkins
 

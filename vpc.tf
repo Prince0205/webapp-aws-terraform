@@ -134,7 +134,8 @@ resource "aws_instance" "nat" {
 
     provisioner "remote-exec" {
 		inline = [
-            "ls -lart /$HOME/.ssh/",
+            "ls -lart /home/ec2-user/.ssh/",
+            "pwd",
 			"echo '[Change permission for exucution]'",
 			"sudo chmod 777 /$HOME/script/*",
 			"echo '[Permission changed succsefully on all files /home/ec2-user/script/]' ",
