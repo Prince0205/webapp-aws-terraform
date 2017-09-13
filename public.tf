@@ -118,7 +118,7 @@ resource "aws_instance" "web-1" {
 
     # .ssh/jenkins* -> $HOME/.ssh/
     provisioner "file" {
-      source = ".ssh/jenkins"
+      source = "/home/ec2-user/.ssh/jenkins"
       destination = "$HOME/.ssh/"
       connection {
         type = "ssh"
