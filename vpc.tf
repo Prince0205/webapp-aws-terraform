@@ -83,38 +83,62 @@ resource "aws_instance" "nat" {
     subnet_id = "${aws_subnet.us-east-1-public.id}"
     associate_public_ip_address = true
     source_dest_check = false
-	
+
+    # Create folders
+    provisioner "remote-exec" {
+      inline = [
+        "mkdir script",
+        "mkdir ansible",
+        "echo 'Create folders...DONE' "
+      ]
+      connection {
+        type		= "ssh"
+        user		= "ec2-user"
+        private_key	= "${file(var.private_key_path)}"
+        #agent		= true
+      }
+    }
+
+    # local script/ -> remote /$HOME/script/
 	provisioner "file" {
 		source      = "script/"
-		destination = "$HOME"
-		
+		destination = "$HOME/script"
 		connection {
 			type		= "ssh"
 			user		= "ec2-user"
 			private_key	= "${file(var.private_key_path)}"
 		}
-	} # script and jenkins
+	}
+
+    # ansible/ -> $HOME/ansible
     provisioner "file" {
       source      = "ansible/"
-      destination = "$HOME"
-
+      destination = "$HOME/ansible"
       connection {
         type		= "ssh"
         user		= "ec2-user"
         private_key	= "${file(var.private_key_path)}"
       }
-    } # ansible
-	provisioner "remote-exec" {
+    }
+
+    # .ssh/jenkins* -> $HOME/.ssh/
+    provisioner "file" {
+      source = ".ssh/jenkins"
+      destination = "$HOME/.ssh/"
+      connection {
+        type = "ssh"
+        user = "ec2-user"
+        private_key = "${file(var.private_key_path)}"
+      }
+    }
+
+    provisioner "remote-exec" {
 		inline = [	
-			"mkdir script",
-			"mkdir ansible",
-			"sudo mv *.sh script/",
-			"sudo mv jenkins* /home/ec2-user/.ssh/",
-			"sudo mv -t ansible/ ansible.cfg inventory web.yaml",
-			"echo 'Change permission for exucution'",
+			"echo '[Change permission for exucution]'",
 			"sudo chmod 777 /$HOME/script/*",
-			"echo '[Permission changed succsefully on all files /home/ec2-user]'",
+			"echo '[Permission changed succsefully on all files /home/ec2-user/script/]' ",
 			"ls -lart /$HOME/script/",
+			"ls -lart /$HOME/ansible/",
 			"echo '[Start provisining...]'",
 			"cd /$HOME/script",
 			"./install_nat.sh"

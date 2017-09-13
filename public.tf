@@ -78,40 +78,74 @@ resource "aws_instance" "web-1" {
     subnet_id = "${aws_subnet.us-east-1-public.id}"
     source_dest_check = false
     associate_public_ip_address = true
-	
-	provisioner "file" {
-		source      = "script/"
-		destination = "$HOME"
-		
-		connection {
-			type		= "ssh"
-			user		= "ec2-user"
-			private_key	= "${file(var.private_key_path)}"
-		}
-	}
-	
-	provisioner "remote-exec" {
-		inline = [
-			"mkdir script",
-			"sudo mv *.sh script/",
-			"sudo mv jenkins* /home/ec2-user/.ssh/",
-			"echo 'Change permission for exucution'",
-			"sudo chmod 777 /$HOME/script/*",
-			"echo '[Permission changed succsefully on all files...]'",
-			"ls -lart /$HOME/script/",
-			"echo '[Start provisining...]'",
-			"cd /$HOME/script",
-			"./install_web.sh"
-		]
-		
-		connection {
-			type		= "ssh"
-			host		= "${aws_instance.web-1.public_ip}"
-			user		= "ec2-user"
-			private_key	= "${file(var.private_key_path)}"
-			#agent		= true
-		}
-	}
+
+    # Create folders
+    provisioner "remote-exec" {
+      inline = [
+        "mkdir script",
+        "mkdir ansible",
+        "echo 'Create folders...DONE' "
+      ]
+      connection {
+        type		= "ssh"
+        user		= "ec2-user"
+        private_key	= "${file(var.private_key_path)}"
+        #agent		= true
+      }
+    }
+
+    # local script/ -> remote /$HOME/script/
+    provisioner "file" {
+      source      = "script/"
+      destination = "$HOME/script"
+      connection {
+        type		= "ssh"
+        user		= "ec2-user"
+        private_key	= "${file(var.private_key_path)}"
+      }
+    }
+
+    # ansible/ -> $HOME/ansible
+    provisioner "file" {
+      source      = "ansible/"
+      destination = "$HOME/ansible"
+      connection {
+        type		= "ssh"
+        user		= "ec2-user"
+        private_key	= "${file(var.private_key_path)}"
+      }
+    }
+
+    # .ssh/jenkins* -> $HOME/.ssh/
+    provisioner "file" {
+      source = ".ssh/jenkins"
+      destination = "$HOME/.ssh/"
+      connection {
+        type = "ssh"
+        user = "ec2-user"
+        private_key = "${file(var.private_key_path)}"
+      }
+    }
+
+    provisioner "remote-exec" {
+      inline = [
+        "echo '[Change permission for exucution]'",
+        "sudo chmod 777 /$HOME/script/*",
+        "echo '[Permission changed succsefully on all files /home/ec2-user/script/]' ",
+        "ls -lart /$HOME/script/",
+        "ls -lart /$HOME/ansible/",
+        "echo '[Start provisining...]'",
+        "cd /$HOME/script",
+        "./install_web.sh"
+      ]
+      connection {
+        type		= "ssh"
+        user		= "ec2-user"
+        private_key	= "${file(var.private_key_path)}"
+        #agent		= true
+      }
+    }
+
     tags {Name = "Web Server 1"}
 }
 

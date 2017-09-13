@@ -68,50 +68,96 @@ resource "aws_instance" "db-1" {
 	vpc_security_group_ids = ["${aws_security_group.db.id}"]
 	subnet_id = "${aws_subnet.us-east-1-private.id}"
 	source_dest_check = false
-	
-	# copy scripts to $HOME directory
-	provisioner "file" {
-		source      = "script/"
-		destination = "$HOME"
-		
+
+
+	# Create folders
+	provisioner "remote-exec" {
+		inline = [
+			"mkdir script",
+			"mkdir ansible",
+			"echo 'Create folders...DONE' "
+		]
 		connection {
+			# connect thourh NAT instance
 			host				= "${aws_instance.db-1.private_ip}"
 			type				= "ssh"
 			user				= "ec2-user"
 			private_key			= "${file(var.private_key_path)}"
-	        bastion_host 		= "${aws_eip.web-1.public_ip}"
+			bastion_host 		= "${aws_eip.web-1.public_ip}"
 			bastion_user		= "ec2-user"
-			bastion_private_key	= "${file(var.private_key_path)}"
-			#agent				= true
+			bastion_private_key = "${file(var.private_key_path)}"
 		}
 	}
-	
+
+	# local script/ -> remote /$HOME/script/
+	provisioner "file" {
+		source      = "script/"
+		destination = "$HOME/script"
+		connection {
+			# connect thourh NAT instance
+			host				= "${aws_instance.db-1.private_ip}"
+			type				= "ssh"
+			user				= "ec2-user"
+			private_key			= "${file(var.private_key_path)}"
+			bastion_host 		= "${aws_eip.web-1.public_ip}"
+			bastion_user		= "ec2-user"
+			bastion_private_key = "${file(var.private_key_path)}"
+		}
+	}
+
+	# ansible/ -> $HOME/ansible
+	provisioner "file" {
+		source      = "ansible/"
+		destination = "$HOME/ansible"
+		connection {
+			# connect thourh NAT instance
+			host				= "${aws_instance.db-1.private_ip}"
+			type				= "ssh"
+			user				= "ec2-user"
+			private_key			= "${file(var.private_key_path)}"
+			bastion_host 		= "${aws_eip.web-1.public_ip}"
+			bastion_user		= "ec2-user"
+			bastion_private_key = "${file(var.private_key_path)}"
+		}
+	}
+
+	# .ssh/jenkins* -> $HOME/.ssh/
+	provisioner "file" {
+		source = ".ssh/jenkins"
+		destination = "$HOME/.ssh/"
+		connection {
+			# connect thourh NAT instance
+			host				= "${aws_instance.db-1.private_ip}"
+			type				= "ssh"
+			user				= "ec2-user"
+			private_key			= "${file(var.private_key_path)}"
+			bastion_host 		= "${aws_eip.web-1.public_ip}"
+			bastion_user		= "ec2-user"
+			bastion_private_key = "${file(var.private_key_path)}"
+		}
+	}
+
 	provisioner "remote-exec" {
 		inline = [
-			"mkdir script",
-			"sudo mv *.sh script/",
-			"sudo mv jenkins* /home/ec2-user/.ssh/",
-			"echo 'Change permission for exucution'",
+			"echo '[Change permission for exucution]'",
 			"sudo chmod 777 /$HOME/script/*",
-			"echo '[Permission changed succsefully on all files /$HOME/script/]'",
+			"echo '[Permission changed succsefully on all files /home/ec2-user/script/]' ",
 			"ls -lart /$HOME/script/",
+			"ls -lart /$HOME/ansible/",
 			"echo '[Start provisining...]'",
 			"cd /$HOME/script",
 			"./install_db.sh"
 		]
-		
 		connection {
-		# connect thourh NAT instance
+			# connect thourh NAT instance
 			host				= "${aws_instance.db-1.private_ip}"
 			type				= "ssh"
 			user				= "ec2-user"
 			private_key			= "${file(var.private_key_path)}"
-	        bastion_host 		= "${aws_eip.web-1.public_ip}"
+			bastion_host 		= "${aws_eip.web-1.public_ip}"
 			bastion_user		= "ec2-user"
 			bastion_private_key = "${file(var.private_key_path)}"
-			#agent				= true
 		}
 	}
-	
     tags {Name = "DB Server 1"}
 }
