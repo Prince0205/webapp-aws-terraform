@@ -127,6 +127,8 @@ resource "aws_instance" "web-1" {
       }
     }
 
+# test 321
+
     provisioner "remote-exec" {
       inline = [
         "echo '[Change permission for exucution]'",
