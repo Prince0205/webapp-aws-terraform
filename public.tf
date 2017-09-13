@@ -2,9 +2,7 @@
   Web Servers
 */
 
-
-#test
-
+# delete line
 
 resource "aws_security_group" "web" {
     name = "vpc_web"
