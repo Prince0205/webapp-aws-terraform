@@ -132,8 +132,6 @@ resource "aws_instance" "nat" {
       }
     }
 
-  
-
     provisioner "remote-exec" {
 		inline = [
             "ls -lart /home/ec2-user/.ssh/",
@@ -162,8 +160,6 @@ resource "aws_eip" "nat" {
     instance = "${aws_instance.nat.id}"
     vpc = true
 }
-
-# test
 
 /*
   Public Subnet
