@@ -161,8 +161,3 @@ resource "aws_instance" "db-1" {
 	}
     tags {Name = "DB Server 1"}
 }
-
-# test 321
-# test 321
-# test 321
-# test 321
