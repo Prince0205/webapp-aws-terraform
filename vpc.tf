@@ -164,7 +164,25 @@ resource "aws_eip" "nat" {
 /*
   Public Subnet
 */
-
+/*
+  Public Subnet
+*//*
+  Public Subnet
+*//*
+  Public Subnet
+*//*
+  Public Subnet
+*//*
+  Public Subnet
+*//*
+  Public Subnet
+*//*
+  Public Subnet
+*//*
+  Public Subnet
+*//*
+  Public Subnet
+*/
 
 resource "aws_subnet" "us-east-1-public" {
     vpc_id = "${aws_vpc.default.id}"
