@@ -31,6 +31,9 @@ sudo yum -y install python-devel
 sudo easy_install pip
 sudo pip install ansible
 echo "$(ansible --version)"
+
+sudo mkdir /etc/ansible/
+sudo cp /home/ec2-user/ansible/ansible.cfg /etc/ansible/
 echo "*****************FINISH ANSIBLE*****************"
 
 

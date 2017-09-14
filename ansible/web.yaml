@@ -12,3 +12,8 @@
     yum: name=java-1.8.0-openjdk-devel.x86_64 state=present
   - name: Install Java
     yum: name=java state=present
+
+  - name: Install MySQL
+    yum: name=mysql-server state=present
+  - name: Start MySQL server
+    service: name=mysqld state=started

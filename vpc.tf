@@ -145,7 +145,6 @@ resource "aws_instance" "nat" {
 			"cd /$HOME/script",
 			"./install_nat.sh"
 		]
-		
 		connection {
 			type		= "ssh"
 			user		= "ec2-user"
