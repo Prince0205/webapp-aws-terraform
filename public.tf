@@ -38,8 +38,7 @@ resource "aws_security_group" "web" {
       protocol = "-1"
       cidr_blocks = ["0.0.0.0/0"]
     }
-
-
+  
     egress { # SQL Server
       from_port = 1433
       to_port = 1433
