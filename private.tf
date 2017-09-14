@@ -78,7 +78,7 @@ resource "aws_instance" "db-1" {
 			"echo 'Create folders...DONE' "
 		]
 		connection {
-			# connect thourh NAT instance
+			# connect via NAT instance
 			host				= "${aws_instance.db-1.private_ip}"
 			type				= "ssh"
 			user				= "ec2-user"

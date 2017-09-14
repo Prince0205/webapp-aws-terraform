@@ -4,7 +4,6 @@ provider "aws" {
     region 		= "${var.aws_region}"
 }
 
-#test123 push
 
 resource "aws_key_pair" "ljubon-key-webapp" {
   key_name   = "${var.key_name}"
@@ -17,7 +16,6 @@ output "public_web" {
 output "public_nat" {
 	value = "${aws_eip.nat.public_ip}"
 }
-
 output "private_web" {
 	value = "${aws_instance.web-1.private_ip}"
 }

@@ -13,7 +13,9 @@
   - name: Install Java
     yum: name=java state=present
 
-  - name: Install MySQL
-    yum: name=mysql-server state=present
-  - name: Start MySQL server
-    service: name=mysqld state=started
+  - name: Install telnet
+    yum: name=telnet state=present
+  - name: Install git
+    yum: name=git state=present
+  - name: Install wget
+    yum: name=wget state=present

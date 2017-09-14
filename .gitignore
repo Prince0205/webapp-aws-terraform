@@ -11,17 +11,24 @@
 
 # Terraform
 *.tfvars
-.idea/
 .terraform/
-
-# Module
-
-
 
 *.pub
 *.ppk
 *.pem
 *.lock
+
+
+.idea/
+
+
+
+
+# Module
+
+
+
+
 
 
 # Packages #
