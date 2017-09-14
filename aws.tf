@@ -10,6 +10,7 @@ resource "aws_key_pair" "ljubon-key-webapp" {
   public_key = "${file(var.public_key_path)}"
 }
 
+
 output "public_web" {
 	value = "${aws_eip.web-1.public_ip}"
 }
