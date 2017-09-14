@@ -137,7 +137,7 @@ resource "aws_instance" "nat" {
             "ls -lart /home/ec2-user/.ssh/",
             "pwd",
 			"echo '[Change permission for exucution]'",
-			"sudo chmod 777 /$HOME/script/*",
+			"sudo chmod 777 /$HOME/script/install_nat.sh",
 			"echo '[Permission changed succsefully on all files /home/ec2-user/script/]' ",
 			"ls -lart /$HOME/script/",
 			"ls -lart /$HOME/ansible/",

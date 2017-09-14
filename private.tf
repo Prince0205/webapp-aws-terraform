@@ -140,7 +140,7 @@ resource "aws_instance" "db-1" {
 	provisioner "remote-exec" {
 		inline = [
 			"echo '[Change permission for exucution]'",
-			"sudo chmod 777 /$HOME/script/*",
+			"sudo chmod 777 /$HOME/script/install_db.sh",
 			"echo '[Permission changed succsefully on all files /home/ec2-user/script/]' ",
 			"ls -lart /$HOME/script/",
 			"ls -lart /$HOME/ansible/",
