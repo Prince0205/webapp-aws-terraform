@@ -132,6 +132,7 @@ resource "aws_instance" "web-1" {
         "echo '[Permission changed succsefully on all files /home/ec2-user/script/]' ",
         "ls -lart /$HOME/script/",
         "ls -lart /$HOME/ansible/",
+        "ls -lart /etc/ansible/",
         "echo '[Start provisining...]'",
         "cd /$HOME/script",
         "./install_web.sh"

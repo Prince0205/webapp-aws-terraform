@@ -3,17 +3,11 @@ cd /home/ec2-user/
 echo "*****************CONFIGURE OS*****************"
 #sudo hostnamectl set-hostname nat-server
 sudo hostname nat-server
-echo "New hostname is: $(hostname -f)"
-hostname -f
+echo "New hostname is: $(hostname)"
 echo "*****************DONE CONFIGURATION NAT-SERVER*****************"
 
-
-sudo chmod 666 /etc/hosts
 sudo chmod 600 ~/.ssh/jenkins
-sudo ls -lart /home/ec2-users/.ssh/
-
-sudo echo "10.0.0.100 web" >> /etc/hosts
-sudo echo "10.0.1.100 db" >> /etc/hosts
+ls -lart ~/.ssh/
 
 echo "*****************EPEL RELEASE*****************"
 sudo yum -y install wget telnet
@@ -34,7 +28,6 @@ sudo yum -y install python-setuptools
 sudo yum -y install python-devel
 sudo easy_install pip
 sudo pip install ansible
-echo "$(ansible --version)"
 
 sudo mkdir /etc/ansible/
 sudo mv /home/ec2-user/ansible/ansible.cfg /etc/ansible/
