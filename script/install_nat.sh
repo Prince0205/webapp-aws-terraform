@@ -9,15 +9,15 @@ sudo chmod 666 /etc/hosts
 sudo chmod 600 ~/.ssh/jenkins
 ls -lart ~/.ssh/
 
-#echo "*****************EPEL RELEASE*****************"
-#sudo yum -y install wget telnet
-#wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-10.noarch.rpm
-#sudo rpm -ivh epel-release-7-10.noarch.rpm
-#sudo yum -y install epel-release
-#sudo yum -y update
-#sudo rm -rf epel-release-7-10.noarch.rpm
-#cd /home/ec2-user/
-#echo "*****************DONE EPEL*****************"
+echo "*****************EPEL RELEASE*****************"
+sudo yum -y install wget telnet
+wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-10.noarch.rpm
+sudo rpm -ivh epel-release-7-10.noarch.rpm
+sudo yum -y install epel-release
+sudo yum -y update
+sudo rm -rf epel-release-7-10.noarch.rpm
+cd /home/ec2-user/
+echo "*****************DONE EPEL*****************"
 
 echo "*****************ANSIBLE*****************"
 sudo yum -y install gcc
