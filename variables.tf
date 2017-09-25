@@ -25,7 +25,8 @@ variable "amis" {
 
 variable "amis-nat" {
   description = "AMIs by region"
-  default = "ami-293a183f" # N. Virginia -> amzn-ami-vpc-nat-hvm-2017.03.1.20170617-x86_64-ebs
+  default = "ami-c998b6b2" # RedHat 14.04 LTS N. Virginia -> RHEL-7.4_HVM_GA-20170808-x86_64-2-Hourly2-GP2
+  #default = "ami-293a183f" # N. Virginia -> amzn-ami-vpc-nat-hvm-2017.03.1.20170617-x86_64-ebs
   #default = "ami-b646bbd9" # Frankfurt -> amzn-ami-vpc-nat-hvm-2016.09.0.20160923-x86_64-ebs
 }
 

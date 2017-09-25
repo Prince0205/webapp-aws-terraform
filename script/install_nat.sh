@@ -14,10 +14,12 @@ sudo yum -y install wget telnet
 wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-10.noarch.rpm
 sudo rpm -ivh epel-release-7-10.noarch.rpm
 sudo yum -y install epel-release
-#sudo yum -y update
+sudo yum -y update
 # glibc-common-2.17-196.172.amzn1.x86_64.rpm
 sudo rm -rf epel-release-7-10.noarch.rpm
 cd /home/ec2-user/
+
+sudo yum install ansible
 echo "*****************DONE EPEL*****************"
 
 echo "*****************ANSIBLE*****************"
