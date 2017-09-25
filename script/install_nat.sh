@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 cd /home/ec2-user/
 echo "*****************CONFIGURE OS*****************"
-#sudo hostnamectl set-hostname nat-server
 sudo hostname nat-server
 echo "New hostname is: $(hostname)"
 echo "*****************DONE CONFIGURATION NAT-SERVER*****************"
@@ -19,9 +18,6 @@ sudo rm -rf epel-release-7-10.noarch.rpm
 cd /home/ec2-user/
 echo "*****************DONE EPEL*****************"
 
-sudo ssh-keyscan web >> ~/.ssh/known_hosts
-sudo ssh-keyscan db >> ~/.ssh/known_hosts
-
 echo "*****************ANSIBLE*****************"
 sudo yum -y install gcc
 sudo yum -y install python-setuptools
@@ -34,3 +30,6 @@ sudo mv /home/ec2-user/ansible/ansible.cfg /etc/ansible/
 sudo mv /home/ec2-user/ansible/hosts /etc/ansible/
 ls -lart $HOME/ansible
 echo "*****************FINISH ANSIBLE*****************"
+
+sudo ssh-keyscan web >> ~/.ssh/known_hosts
+sudo ssh-keyscan db >> ~/.ssh/known_hosts

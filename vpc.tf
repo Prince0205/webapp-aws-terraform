@@ -95,7 +95,6 @@ resource "aws_instance" "nat" {
         type		= "ssh"
         user		= "ec2-user"
         private_key	= "${file(var.private_key_path)}"
-        #agent		= true
       }
     }
 
@@ -135,6 +134,7 @@ resource "aws_instance" "nat" {
     provisioner "remote-exec" {
 		inline = [
             "ls -lart /home/ec2-user/.ssh/",
+            "ls -lart /home/ec2-user/ansible/",
             "pwd",
 			"echo '[Change permission for exucution]'",
 			"sudo chmod 777 /$HOME/script/install_nat.sh",
@@ -143,7 +143,8 @@ resource "aws_instance" "nat" {
 			"ls -lart /$HOME/ansible/",
 			"echo '[Start provisining...]'",
 			"cd /$HOME/script",
-			"./install_nat.sh"
+			"./install_nat.sh",
+			"ls -lart /$HOME/ansible/"
 		]
 		connection {
 			type		= "ssh"

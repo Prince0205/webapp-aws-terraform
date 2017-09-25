@@ -145,7 +145,6 @@ resource "aws_instance" "web-1" {
       }
     }
 
-  # test test
 
     tags {Name = "Web Server 1"}
 }
