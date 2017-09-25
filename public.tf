@@ -82,8 +82,7 @@ resource "aws_instance" "web-1" {
     provisioner "remote-exec" {
       inline = [
         "mkdir script",
-        "mkdir ansible",
-        "echo 'Create folders...DONE' "
+        "mkdir ansible"
       ]
       connection {
         type		= "ssh"
