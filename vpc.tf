@@ -84,6 +84,17 @@ resource "aws_instance" "nat" {
     associate_public_ip_address = true
     source_dest_check = false
 
+    # .ssh/jenkins* -> $HOME/.ssh/
+    provisioner "file" {
+      source = "/home/ec2-user/.ssh/jenkins"
+      destination = "/home/ec2-user/.ssh/jenkins"
+      connection {
+        type = "ssh"
+        user = "ec2-user"
+        private_key = "${file(var.private_key_path)}"
+      }
+    }
+
     # Create folders
     provisioner "remote-exec" {
       inline = [
@@ -120,16 +131,7 @@ resource "aws_instance" "nat" {
       }
     }
 
-    # .ssh/jenkins* -> $HOME/.ssh/
-    provisioner "file" {
-      source = "/home/ec2-user/.ssh/jenkins"
-      destination = "/home/ec2-user/.ssh/jenkins"
-      connection {
-        type = "ssh"
-        user = "ec2-user"
-        private_key = "${file(var.private_key_path)}"
-      }
-    }
+
 
     provisioner "remote-exec" {
 		inline = [

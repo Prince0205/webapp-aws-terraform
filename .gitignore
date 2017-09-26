@@ -13,23 +13,16 @@
 *.tfvars
 .terraform/
 
+# IntelliJ Idea
+.idea/
+*.iml
+
+
+# SSH keys
 *.pub
 *.ppk
 *.pem
 *.lock
-
-
-.idea/
-
-
-
-
-# Module
-
-
-
-
-
 
 # Packages #
 ############
@@ -41,7 +34,6 @@
 *.iso
 *.jar
 *.rar
-*.tar
 *.zip
 
 # Logs and databases #
