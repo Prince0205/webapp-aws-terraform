@@ -132,7 +132,6 @@ resource "aws_instance" "nat" {
     }
 
 
-
     provisioner "remote-exec" {
 		inline = [
             "ls -lart /home/ec2-user/.ssh/",
@@ -145,7 +144,7 @@ resource "aws_instance" "nat" {
 			"ls -lart /$HOME/ansible/",
 			"echo '[Start provisining...]'",
 			"cd /$HOME/script",
-			#"./install_nat.sh",
+			"./install_nat.sh",
 			"ls -lart /$HOME/ansible/"
 		]
 		connection {
