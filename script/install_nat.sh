@@ -12,7 +12,7 @@ ls -lart ~/.ssh/
 echo "*****************EPEL RELEASE*****************"
 sudo yum -y install wget telnet unzip dos2unix
 sudo rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-#sudo yum -y update
+#sudo yum -y update # test
 echo "*****************DONE EPEL*****************"
 
 echo "*****************ANSIBLE*****************"
