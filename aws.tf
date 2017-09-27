@@ -4,7 +4,6 @@ provider "aws" {
     region 		= "${var.aws_region}"
 }
 
-
 resource "aws_key_pair" "ljubon-key-webapp" {
   key_name   = "${var.key_name}"
   public_key = "${file(var.public_key_path)}"
@@ -25,3 +24,6 @@ output "private_db" {
 output "private_nat" {
 	value = "${aws_instance.nat.private_ip}"
 }
+
+
+# test
