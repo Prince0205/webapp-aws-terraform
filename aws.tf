@@ -26,4 +26,4 @@ output "private_nat" {
 }
 
 
-# test 2
+# test diplomski
